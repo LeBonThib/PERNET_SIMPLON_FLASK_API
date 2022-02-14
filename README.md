@@ -1,5 +1,7 @@
 # G3_API
 
+## Fanny, Jaufret, Thibaut
+
 ### Faites les commandes suivantes dans votre terminal bash à la racine du projet:
 
 ```bash
