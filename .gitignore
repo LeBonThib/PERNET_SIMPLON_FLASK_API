@@ -119,6 +119,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+g3_api_venv/
 
 # Spyder project settings
 .spyderproject
