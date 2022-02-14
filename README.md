@@ -1,4 +1,4 @@
-# G3-Projet-TBD
+# G3_API
 
 ### Faites les commandes suivantes dans votre terminal bash à la racine du projet:
 
