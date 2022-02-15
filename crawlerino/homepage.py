@@ -1,6 +1,5 @@
 from flask import render_template, flash, Blueprint, request
 from crawlerino import db
-from crawlerino import create_app
 from crawlerino.models import tablerino
 import requests
 import operator
@@ -12,19 +11,24 @@ homepage = Blueprint('homepage', __name__)
 
 @homepage.route('/', methods=['GET', 'POST'])
 def home_page():
-    url_list = get_url_from_db()
-    max_url = len(url_list)
     substringerino = 'wikipedia.org'
     formerino = request.form
     if request.method == 'POST':
-        url_to_scrape = formerino.get('url_to_scrape')
-        if validators.url(url_to_scrape):
-            if substringerino in url_to_scrape:
-                get_json_tree(url_to_scrape)
+        url_to_scrape = formerino.get('scrapyard')
+        if formerino.get('scrapyard'):
+            if validators.url(url_to_scrape):
+                if substringerino in url_to_scrape:
+                    get_json_tree(url_to_scrape)
+                else:
+                    flash("POURQUOI C'EST PAS UN LIEN WIKIPEDIA?! (ಠ益ಠ)", category='error')
             else:
-                flash("POURQUOI C'EST PAS UN LIEN WIKIPEDIA?! (ಠ益ಠ)", category='error')
+                flash("C'EST QUOI CETTE URL DE MERDE?! (ಠ益ಠ)", category='error')
+        if formerino.get('shadow_realm'):
+            yeet()
         else:
-            flash("C'EST QUOI CETTE URL DE MERDE?! (ಠ益ಠ)", category='error')
+            flash("ELLE EST OÙ MON URL?! ٩(ఠ益ఠ)۶", category='error')
+    url_list = get_url_from_db()
+    max_url = len(url_list)
     return render_template('homepage.html', url_list_param=url_list, max_url_param=max_url)
 
 def page_reading(url_to_scrape):
@@ -88,3 +92,7 @@ def get_url_from_db():
     for url in url_query:
         url_list.append(url[0])
     return url_list
+
+def yeet():
+    db.session.query(tablerino).delete()
+    db.session.commit()

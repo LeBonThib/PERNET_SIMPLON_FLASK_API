@@ -1,7 +1,6 @@
 from crawlerino import create_app
 
 app = create_app()
-app.app_context().push()
 
 # enable debugging mode
 app.config["DEBUG"] = True
