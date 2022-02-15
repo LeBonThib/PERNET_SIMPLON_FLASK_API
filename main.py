@@ -1,9 +1,10 @@
-from flask import Flask
+from crawlerino import create_app
 
-app = Flask(__name__)
+app = create_app()
+app.app_context().push()
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+# enable debugging mode
+app.config["DEBUG"] = True
 
-app.run(debug=True)
+if __name__ == '__main__': #prevents web server starting without running main.py (e.g: can't import it and run it from another file)
+    app.run()
