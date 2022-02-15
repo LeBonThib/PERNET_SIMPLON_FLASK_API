@@ -12,14 +12,20 @@ homepage = Blueprint('homepage', __name__)
 
 @homepage.route('/', methods=['GET', 'POST'])
 def home_page():
+    url_list = get_url_from_db()
+    max_url = len(url_list)
+    substringerino = 'wikipedia.org'
     formerino = request.form
     if request.method == 'POST':
         url_to_scrape = formerino.get('url_to_scrape')
         if validators.url(url_to_scrape):
-            get_json_tree(url_to_scrape)
+            if substringerino in url_to_scrape:
+                get_json_tree(url_to_scrape)
+            else:
+                flash("POURQUOI C'EST PAS UN LIEN WIKIPEDIA?! (ಠ益ಠ)", category='error')
         else:
             flash("C'EST QUOI CETTE URL DE MERDE?! (ಠ益ಠ)", category='error')
-    return render_template('homepage.html')
+    return render_template('homepage.html', url_list_param=url_list, max_url_param=max_url)
 
 def page_reading(url_to_scrape):
     response = requests.get(url_to_scrape)
@@ -61,6 +67,8 @@ def get_json_tree(url_to_scrape):
     json_to_database(json_result, url_to_scrape)
 
 def json_to_database(json_result, url_to_scrape):
+    url_list = get_url_from_db()
+    max_url = len(url_list)
     if db.session.query(tablerino.json_id).filter_by(json_urlerino=url_to_scrape).first() is None:
         new_json = tablerino(
             json_objecterino = json_result,
@@ -72,4 +80,11 @@ def json_to_database(json_result, url_to_scrape):
         flash("C'EST DANS LA BASE! T'ES VRAIMENT TROP FORT! ᕕ( ᐛ )ᕗ", category='success')
     else:
         flash ("POURQUOI TU AJOUTES DEUX FOIS LA MÊME PAGE?! T'ES CON OU QUOI?! (‡▼益▼)", category='error')
-    return render_template('homepage.html')
+    return render_template('homepage.html', url_list_param=url_list, max_url_param=max_url)
+
+def get_url_from_db():
+    url_query = tablerino.query.with_entities(tablerino.json_urlerino).distinct()
+    url_list = []
+    for url in url_query:
+        url_list.append(url[0])
+    return url_list
