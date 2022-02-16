@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}SCRAPING{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <form method="post">
+            <div class="form-group">
+                <label class="text-center">DONNE TON URL ET PLUS VITE QUE ÇA! (ง ͠° ͟ʖ ͡°)ง</label>
+                <textarea class="form-control" name="scrapyard" value="scrapyard" rows="2"></textarea>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">SCRAPE ME DADDY (≧◡≦)</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- <br/><br/>
+<div class="container">
+    <div class="row justify-content-center">
+        <p>UN GROS GRAPH SA MAMAN! (*≧ω≦*)</p>
+    </div>
+</div> -->
+<br/><br/>
+<div class="container">
+    <div class="row justify-content-center">
+        <p>UNE SUPER LISTE DE TOUTES LES URL QUE JE CONNAIS DÉJÀ! (o･ω･o)</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>URLERINO</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for url in range(0, max_url_param) %}
+                    <tr>
+                        <td><a href='{{ url_list_param[url] }}', target="_blank">{{ url_list_param[url] }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<br/><br/>
+<div class="container">
+    <div class="row justify-content-center">
+        <form method="post">
+            <button type="hidden" class="btn btn-danger" name="shadow_realm" value="shadow_realm">(┛◉Д◉)┛彡┻━┻</button>
+        </form>
+    </div>
+</div>
+{% endblock %} 
