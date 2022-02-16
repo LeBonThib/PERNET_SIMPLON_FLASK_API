@@ -23,7 +23,7 @@ def home_page():
                     flash("POURQUOI C'EST PAS UN LIEN WIKIPEDIA?! (ಠ益ಠ)", category='error')
             else:
                 flash("C'EST QUOI CETTE URL DE MERDE?! (ಠ益ಠ)", category='error')
-        if formerino.get('shadow_realm'):
+        elif formerino.get('shadow_realm'):
             yeet()
         else:
             flash("ELLE EST OÙ MON URL?! ٩(ఠ益ఠ)۶", category='error')
