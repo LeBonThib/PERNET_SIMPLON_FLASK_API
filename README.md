@@ -1,6 +1,4 @@
-# PERNET_SIMPLON_API
-
-## Fanny, Jaufret, Thibaut
+# PERNET_SIMPLON_FLASK_API
 
 ### Faites les commandes suivantes dans votre terminal bash à la racine du projet:
 
