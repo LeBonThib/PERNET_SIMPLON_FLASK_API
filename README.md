@@ -1,4 +1,4 @@
-# G3_API
+# PERNET_SIMPLON_API
 
 ## Fanny, Jaufret, Thibaut
 
